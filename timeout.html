@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="bootstrap-5.0.0-beta3-dist/css/bootstrap-grid.min.css"></script>
+        <!-- <script src="bootstrap-4.5.2/site/docs/4.5/assets/js/vendor/jquery.slim.min.js"></script> -->
+        <script src="bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
+        <!-- <link rel="stylesheet" type="text/css" href="bootstrap-4.5.2/dist/css/bootstrap.min.css"> -->
+        <title>TIMEOUT</title>
+        <style>
+            button{
+                padding: 10px;
+                background-color: black;
+                border: none;
+                color: white;
+                border-radius: 8px;
+                margin-bottom: 30px;
+            }
+            #stopwatch{
+                border: 5px solid blue;
+                height: 300px;
+                width: 500px;
+                border-radius: 8px;
+                margin: 90px 170px;
+                padding: 30px 70px;
+
+            }
+        </style>
+    </head>
+    <body>
+        <div id="stopwatch">
+            <div id="wholeTime" style="display: flex; margin-right: 10px;" class="container-fluid"> 
+                <div id="hour" class="border border-weight " style="border-radius: 50%; background-color: cornflowerblue; height: 50px; width: 50px; text-align: center; padding: 10px;">0</div>
+                <div id="min"  class="border border-weight text-center" style="border-radius: 50%; background-color: cornflowerblue; height: 50px; width: 50px;  text-align: center; padding: 10px;">0</div>
+                <div id="sec"  class="border border-weight text-center" style="border-radius: 50%; background-color: cornflowerblue; height: 50px; width: 50px;  text-align: center; padding: 10px;">0</div>
+                <div id="milsec"  class="border border-weight text-center" style="border-radius: 50%; background-color: cornflowerblue; height: 50px; width: 50px;  text-align: center; padding: 10px;">0</div>
+            </div>
+            <br>
+            <button onclick="startFunc()" class="btn btn-lg bg-info">Start</button>
+            <button onclick="pauseFunc()" class="btn btn-lg bg-info">Pause</button>
+            <button onclick="lapFunc()" class="btn btn-lg bg-info">Laps</button>
+            <div id="lapdisplay"></div>
+
+        </div>
+
+
+        <script>
+            // setTimeout runs only once after the time that was set
+            //   setInterval runs after every set time without stopping
+            // 
+            // var myTime;
+            // function startFunc() {
+            //     if (myTime) {
+            //         return; `THis runs if there is a value in myTime`
+            //     }else{
+            //        myTime = setInterval(count, 1000); 
+            //     }
+            // }
+                var myTime;
+                var miltime = milsec.innerHTML;
+                var sectime = sec.innerHTML;
+                var mintime = min.innerHTML;
+                var hrtime = hour.innerHTML;
+                function startFunc() {
+                    if(myTime){
+                        return;
+                    }else{
+                        myTime = setInterval(count, 10);
+                    }
+                }
+                function count() {
+                    var count = milsec.innerHTML;
+                    count++;
+                    milsec.innerHTML = count;
+                    parseInt(sectime);
+                    parseInt(mintime);
+                    parseInt(hrtime);
+
+                    if(milsec.innerHTML == 99){
+                        milsec.innerHTML = 0;
+                        sectime++;
+                        sec.innerHTML = sectime;
+                    }
+                    else if (sec.innerHTML == 60) {
+                        milsec.innerHTML = 0;
+                        sectime = 0;
+                //         milsec++;
+                        sectime++;
+                        mintime++;
+                //         milsec.innerHTML = milsec;
+                        sec.innerHTML = sectime;
+                        min.innerHTML = mintime;
+                    }
+                    else if (min.innerHTML == 60) {
+                        milsec.innerHTML = 0;
+                        sectime = 0;
+                        mintime = 0;
+                //         milsec++;
+                        sectime++;
+                        mintime++;
+                        hrtime++;
+                //         milsec.innerHTML = mil
+                        sec.innerHTML = sectime;
+                        min.innerHTML = mintime;
+                        hr.innerHTML = hrtime;
+                    }
+                }
+                function pauseFunc() {
+                    clearInterval(myTime);
+                    myTime = undefined;
+                }
+                function lapFunc() {
+                    var timer = hrtime + ":" + mintime + ":" + sectime + ":" + miltime;
+                    document.getElementById("lapdisplay").innerHTML += timer + '<br>';
+                }
+
+        </script>
+    </body>
+</html>
